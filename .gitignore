@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+db/simulation.db
+models/phishing_detector.joblib
+.streamlit/
+venv/
