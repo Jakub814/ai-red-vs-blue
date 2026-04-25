@@ -57,178 +57,181 @@ ai-red-vs-blue/
     ├── red_team.py
     ├── simulation.py
     └── train_model.py
-
-
-File Descriptions
-app.py
+```
+## File Descriptions
+### app.py
 
 Main Streamlit application.
 Provides the dashboard interface for:
+- running simulation rounds
+- viewing the latest attack and detection result
+- displaying stored simulation history
+- showing metrics and charts
+- exporting results to CSV
 
-running simulation rounds
-viewing the latest attack and detection result
-displaying stored simulation history
-showing metrics and charts
-exporting results to CSV
-src/red_team.py
+### src/red_team.py
 
 Implements the Red Team generator.
 Produces synthetic benign and malicious messages with randomized wording, brands, names, and difficulty levels.
 
-src/blue_team.py
+### src/blue_team.py
 
 Implements the Blue Team detector.
 Loads the trained machine-learning model, classifies messages as benign or malicious, calculates confidence, and produces explanation text.
 
-src/simulation.py
+### src/simulation.py
 
 Coordinates a single simulation round.
 Calls the Red Team generator, sends the message to the Blue Team detector, and returns the completed result object.
 
-src/database.py
+### src/database.py
 
 Handles SQLite database setup and data storage.
 Responsible for:
+- creating the database
+- inserting simulation results
+- loading stored results
 
-creating the database
-inserting simulation results
-loading stored results
-src/train_model.py
+### src/train_model.py
 
 Trains and saves the phishing detection model using predefined benign and malicious training examples.
 
-check_db.py
+### check_db.py
 
 Simple helper script used to inspect stored SQLite data directly in the terminal.
 
-How the System Works
-The Red Team generates a synthetic text sample.
-The sample is labelled internally as either benign or malicious.
-The Simulation Engine sends the sample to the Blue Team.
-The Blue Team classifier predicts the label and returns:
-predicted label
-confidence
-explanation
-The result is stored in SQLite.
-The dashboard displays:
-latest message
-prediction
-metrics
-charts
-historical results
-How to Run the Project
-1. Create and activate a virtual environment
+## How the System Works
+1. The Red Team generates a synthetic text sample.
+2. The sample is labelled internally as either benign or malicious.
+3. The Simulation Engine sends the sample to the Blue Team.
+4. The Blue Team classifier predicts the label and returns:
+    - predicted label
+    - confidence
+    - explanation
+5. The result is stored in SQLite.
+6. The dashboard displays:
+    - latest message
+    - prediction
+    - metrics
+    - charts
+    - historical results
+      
+## How to Run the Project
+### 1. Create and activate a virtual environment
 
 On Windows PowerShell:
-
+```text
 python -m venv venv
 venv\Scripts\activate
-2. Install dependencies
+```
+
+### 2. Install dependencies
+```text
 pip install -r requirements.txt
-3. Train the model
+```
+### 3. Train the model
+```text
 python src/train_model.py
-
+```
 This creates:
-
+```text
 models/phishing_detector.joblib
-4. Run the Streamlit app
+```
+### 4. Run the Streamlit app
+```text
 streamlit run app.py
+```
 
 If Streamlit gives a command/path issue on Windows, use:
-
+```text
 python -m streamlit run app.py
-5. Open the app
+```
+### 5. Open the app
 
 Once running, Streamlit should provide a local URL such as:
-
+```text
 http://localhost:8501
-
+```
 Open that in your browser.
 
-Dashboard Functionality
-Simulation Controls
+##  Dashboard Functionality
+### Simulation Controls
 
 The sidebar allows the user to:
+- choose how many rounds to run
+- start a simulation batch
+- reset the database
+- filter results by label
 
-choose how many rounds to run
-start a simulation batch
-reset the database
-filter results by label
-Main Output
-
+### Main Output
 The dashboard displays:
+- latest generated attack/message
+- Blue Team classification result
+- confidence score
+- explanation text
 
-latest generated attack/message
-Blue Team classification result
-confidence score
-explanation text
-Metrics
-
+### Metrics
 The dashboard calculates:
 
-total rounds
-correct detections
-accuracy
-true positives
-true negatives
-false positives
-false negatives
-precision
-recall
-F1 score
-Charts
+- total rounds
+- correct detections
+- accuracy
+- true positives
+- true negatives
+- false positives
+- false negatives
+- precision
+- recall
+- F1 score
+
+### Charts
 
 The dashboard includes:
+- true label distribution
+- predicted label distribution
+- attack type distribution
+- confusion matrix
 
-true label distribution
-predicted label distribution
-attack type distribution
-confusion matrix
-Export
-
+### Export
 Users can download all stored results as a CSV file.
 
-Example Use Cases
-Demonstrate a safe AI Red vs Blue simulation for an academic audience
-Show how phishing-style text can be classified by a lightweight ML pipeline
-Run repeated rounds to generate evaluation data
-Compare benign and malicious outcomes over time
-Produce screenshots and results for dissertation chapters
-Safety and Ethics
+## Example Use Cases
+- Demonstrate a safe AI Red vs Blue simulation for an academic audience
+- Show how phishing-style text can be classified by a lightweight ML pipeline
+- Run repeated rounds to generate evaluation data
+- Compare benign and malicious outcomes over time
+- Produce screenshots and results for dissertation chapters
 
+## Safety and Ethics
 This project is intentionally constrained for safe academic use:
-
-all messages are synthetic
-execution is local
-no real phishing delivery occurs
-no malware is generated
-no external systems are targeted
-
+- all messages are synthetic
+- execution is local
+- no real phishing delivery occurs
+- no malware is generated
+- no external systems are targeted
 The project is designed to align with the ethical and legal constraints discussed in the dissertation.
 
-Current Limitations
-The generated dataset is still synthetic and relatively small
-The classifier is lightweight and intended for prototype-scale experimentation
-The current evaluation environment is local only
-The dashboard is functional rather than enterprise-grade
-
+## Current Limitations
+- The generated dataset is still synthetic and relatively small
+- The classifier is lightweight and intended for prototype-scale experimentation
+- The current evaluation environment is local only
+- The dashboard is functional rather than enterprise-grade
 These limitations are acceptable for the scope of a Final Year Project and are discussed in the dissertation as part of the prototype evaluation.
 
-Possible Future Improvements
-Larger and more varied synthetic datasets
-More advanced phishing generation logic
-Stronger classifier training and validation
-Difficulty-based comparative testing
-Enhanced explanation techniques
-More advanced dashboard filtering and analytics
-User testing and usability feedback
-Deployment in a contained lab/test environment
-Author
+## Possible Future Improvements
+- Larger and more varied synthetic datasets
+- More advanced phishing generation logic
+- Stronger classifier training and validation
+- Difficulty-based comparative testing
+- Enhanced explanation techniques
+- More advanced dashboard filtering and analytics
+- User testing and usability feedback
+- Deployment in a contained lab/test environment
 
-Jakub Leszczynski
-Bachelor of Science (Honours) in Software Development
+## Author
+**Jakub Leszczynski**<br>
+Bachelor of Science (Honours) in Software Development<br>
 Final Year Project
 
-License
-
+## License
 This project is for academic and educational use only.
