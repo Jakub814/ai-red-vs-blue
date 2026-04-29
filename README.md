@@ -180,8 +180,6 @@ The sidebar allows the user to:
 - start a simulation batch
 - reset the database
 
-
-
 ### Main Output
 The dashboard displays:
 - latest generated attack/message
@@ -195,7 +193,6 @@ The dashboard displays:
 
 ### Metrics
 The dashboard calculates:
-
 - total rounds
 - correct detections
 - accuracy
@@ -209,7 +206,6 @@ The dashboard calculates:
 - attack success rate
 
 ### Charts
-
 The dashboard includes:
 - true label distribution
 - predicted label distribution
@@ -220,7 +216,7 @@ The dashboard includes:
 - confusion matrix
 
 ### Misclassification Review
-Misclassification Review
+The dashboard includes a recent misclassifications section to help analyse missed malicious cases and other classification errors.
 
 ### Export
 Users can download results as a CSV file.
