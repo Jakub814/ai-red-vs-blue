@@ -19,7 +19,8 @@ def init_db():
             true_label TEXT,
             predicted_label TEXT,
             confidence REAL,
-            explanation TEXT
+            explanation TEXT,
+            defense_mode TEXT
         )
     """)
 
@@ -38,8 +39,9 @@ def save_result(result: dict):
             true_label,
             predicted_label,
             confidence,
-            explanation
-        ) VALUES (?, ?, ?, ?, ?, ?, ?)
+            explanation,
+            defense_mode
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
     """, (
         result["attack_type"],
         result["difficulty"],
@@ -47,7 +49,8 @@ def save_result(result: dict):
         result["true_label"],
         result["predicted_label"],
         result["confidence"],
-        result["explanation"]
+        result["explanation"],
+        result["defense_mode"]
     ))
 
     conn.commit()
@@ -59,7 +62,7 @@ def load_results():
 
     cursor.execute("""
         SELECT id, timestamp, attack_type, difficulty, message,
-               true_label, predicted_label, confidence, explanation
+               true_label, predicted_label, confidence, explanation, defense_mode
         FROM simulation_results
         ORDER BY id DESC
     """)
